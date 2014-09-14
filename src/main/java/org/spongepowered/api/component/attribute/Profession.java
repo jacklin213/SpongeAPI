@@ -24,8 +24,6 @@
  */
 package org.spongepowered.api.component.attribute;
 
-import java.util.Arrays;
-
 import org.spongepowered.api.component.Component;
 
 /**
@@ -53,40 +51,36 @@ public interface Profession extends Component {
         String getCareer();
         
         public static enum VanillaCareer implements Career {
-            FLETCHER(0, 0, "minecraft:cfletcher"),
-            FARMER(0, 1, "minecraft:cfarmer"),
-            FISHERMAN(0, 2, "minecraft:cfisherman"),
-            SHEPHERD(0, 3, "minecraft:cshepherd"),
-            LIBRARIAN(1, 0, "minecraft:clibrarian"),
-            CLERIC(2, 0, "minecraft:ccleric"),
-            TOOLSMITH(3, 0, "minecraft:ctoolsmith"),
-            ARMORER(3, 1, "minecraft:carmorer"),
-            WEAPONSMITH(3, 2, "minecraft:cweaponsmith"),
-            BUTCHER(4, 0, "minecraft:cbutcher"),
-            LEATHERWORKER(4, 1, "minecraft:cleatherworker")
+            FLETCHER(0, "minecraft:farmer", "minecraft:cfletcher"),
+            FARMER(1, "minecraft:farmer", "minecraft:cfarmer"),
+            FISHERMAN(2, "minecraft:farmer", "minecraft:cfisherman"),
+            SHEPHERD(3, "minecraft:farmer", "minecraft:cshepherd"),
+            LIBRARIAN(0, "minecraft:librarian", "minecraft:clibrarian"),
+            CLERIC(0, "minecraft:priest", "minecraft:ccleric"),
+            TOOLSMITH(0, "minecraft:blacksmith", "minecraft:ctoolsmith"),
+            ARMORER(1, "minecraft:blacksmith", "minecraft:carmorer"),
+            WEAPONSMITH(2, "minecraft:blacksmith", "minecraft:cweaponsmith"),
+            BUTCHER(0, "minecraft:butcher", "minecraft:cbutcher"),
+            LEATHERWORKER(1, "minecraft:butcher", "minecraft:cleatherworker")
             ;
             
-            private final int pID;
-            private final int cID;
+            private final int id;
+            private final String profession;
             private final String career;
             
-            VanillaCareer(int pID, int cID, String career) {
-                this.pID = pID;
-                this.cID = cID;
+            VanillaCareer(int id, String profession, String career) {
+                this.id = id;
+                this.profession = profession;
                 this.career = career;
             }
 
-            public final int getPID() {
-                return pID;
-            }
-            
-            public final int getCID() {
-                return cID;
+            public final int getID() {
+                return id;
             }
 
             @Override
             public String getProfession() {
-                return VanillaProfession.getProfession(pID);
+                return profession;
             }
 
             @Override
